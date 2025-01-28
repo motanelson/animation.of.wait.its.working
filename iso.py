@@ -69,4 +69,5 @@ def create_iso(output_file="my_iso.iso"):
     print(f"ISO criada com sucesso: {output_file}")
 
 # Executa a função principal
+print("\033c\033[43;30m\n")
 create_iso()
