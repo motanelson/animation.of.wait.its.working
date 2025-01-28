@@ -14,6 +14,15 @@ def create_pvd(volume_name="MYISO"):
     pvd[40:72] = volume_name.ljust(32).encode('ascii')  # Nome do volume
     pvd[80:84] = struct.pack('<I', total_sectors)  # Número total de setores (little-endian)
     pvd[84:88] = struct.pack('>I', total_sectors)  # Número total de setores (big-endian)
+    pvd[120:121] = b'\x01'
+    pvd[123:124] = b'\x01'
+    pvd[124:125] = b'\x01'
+    pvd[127:128] = b'\x01'
+    pvd[158:162] = struct.pack('<I', 18)  # Número total de setores (little-endian)
+    pvd[165:169] = struct.pack('<I', 18)  # Número total de setores (little-endian)
+    pvd[184:185] = b'\x01'
+    pvd[187:188] = b'\x01'
+    pvd[188:189] = b'\x01'
     return pvd
 
 # Registro de diretório alinhado
