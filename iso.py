@@ -7,11 +7,10 @@ def create_empty_sector():
 # Primary Volume Descriptor (PVD)
 def create_pvd(volume_name="MYISO"):
     total_sectors = 20
-    ids='CD001'
     pvd = bytearray(2048)
     pvd[0:1] = b'\x01'  # Tipo de descritor
-    pvd[1:6] = ids.ljust(32).encode('ascii')  # Identificador ISO
-    pvd[6:39] = b'\x01'  # Versão do descritor
+    pvd[1:6] = b'CD001'  # Identificador ISO
+    pvd[6:7] = b'\x01'  # Versão do descritor
     pvd[40:72] = volume_name.ljust(32).encode('ascii')  # Nome do volume
     pvd[80:84] = struct.pack('<I', total_sectors)  # Número total de setores (little-endian)
     pvd[84:88] = struct.pack('>I', total_sectors)  # Número total de setores (big-endian)
@@ -34,7 +33,7 @@ def create_root_directory():
     root_dir = bytearray(2048)
     current_dir = create_directory_record(".", 17, 2048, is_file=False)
     parent_dir = create_directory_record("..", 17, 2048, is_file=False)
-    hello_file = create_directory_record("HELLO.TXT;1", 18, 11, is_file=True)
+    hello_file = create_directory_record("HELLO.TXT", 18, 11, is_file=True)
     
     # Adiciona os registros ao setor e preenche com zeros se necessário
     entries = current_dir + parent_dir + hello_file
@@ -68,6 +67,6 @@ def create_iso(output_file="my_iso.iso"):
             iso_file.write(create_empty_sector())
 
     print(f"ISO criada com sucesso: {output_file}")
-print("\033c\033[43;30m\m")
+
 # Executa a função principal
 create_iso()
