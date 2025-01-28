@@ -11,6 +11,9 @@ def create_pvd(volume_name="MYISO"):
     pvd[0:1] = b'\x01'  # Tipo de descritor
     pvd[1:6] = b'CD001'  # Identificador ISO
     pvd[6:7] = b'\x01'  # Versão do descritor
+    for n in range(7,40):
+        nn=n+1
+        pvd[n:nn] = b'\x20'
     pvd[40:72] = volume_name.ljust(32).encode('ascii')  # Nome do volume
     pvd[80:84] = struct.pack('<I', total_sectors)  # Número total de setores (little-endian)
     pvd[84:88] = struct.pack('>I', total_sectors)  # Número total de setores (big-endian)
@@ -18,11 +21,28 @@ def create_pvd(volume_name="MYISO"):
     pvd[123:124] = b'\x01'
     pvd[124:125] = b'\x01'
     pvd[127:128] = b'\x01'
+    pvd[129:130] = b'\x08'
+    pvd[130:131] = b'\x08'
+    pvd[132:133] = b'\x0A'
+    pvd[139:140] = b'\x0A'
+    pvd[140:141] = b'\x16'
+    pvd[151:152] = b'\x17'
+    pvd[156:157] = b'\x22'
     pvd[158:162] = struct.pack('<I', 18)  # Número total de setores (little-endian)
     pvd[165:169] = struct.pack('<I', 18)  # Número total de setores (little-endian)
+    pvd[172:173] = b'\x08'
+    pvd[174:175] = b'\x7d'
+    pvd[175:176] = b'\x01'
+    pvd[176:177] = b'\x1a'
+    pvd[177:178] = b'\x13'
+    pvd[179:180] = b'\x1c'
+    pvd[181:182] = b'\x02'
     pvd[184:185] = b'\x01'
     pvd[187:188] = b'\x01'
     pvd[188:189] = b'\x01'
+    for n in range(0xbe,0x36f):
+        nn=n+1
+        pvd[n:nn] = b'\x20'
     return pvd
 
 # Registro de diretório alinhado
