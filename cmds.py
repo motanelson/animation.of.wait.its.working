@@ -38,7 +38,7 @@ def desenhar_menu(nivel):
     
     for opcao in nivel:
         botao = pygame.Rect(50, y, 700, 50)
-        pygame.draw.rect(tela, (100, 100, 255), botao)
+        pygame.draw.rect(tela, (0, 0, 0), botao)
         texto_botao = fonte.render(opcao.split("=")[0], True, yellows)
         tela.blit(texto_botao, (60, y + 10))
         botoes.append((botao,opcao.split("=")[0]))
