@@ -1,3 +1,6 @@
-# progman
+ssl user sdcard user:java pass:javaos
 
-a progman application
+change wallpaper on startup: feh --bg-filljavaos.png
+
+startup programs autoexec: /home/java/.config/openbox/autostart
+
