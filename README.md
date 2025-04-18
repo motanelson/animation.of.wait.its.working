@@ -1,4 +1,4 @@
-ssl user sdcard user:llvm pass:llvmos
+ssl user sdcard user:mono pass:monoos
 
 change wallpaper on startup: feh --bg-filljavaos.png
 
